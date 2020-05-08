@@ -1,0 +1,52 @@
+body{
+    margin: 0;
+}
+
+table, th, tbody, td{
+    border: 1px solid #000;
+}
+
+button{
+    display: block;
+    margin-right: 0;
+    margin-left: auto;
+}
+
+img{
+    display: block;
+    margin-left: auto;
+    margin-right: 20px;
+    margin-top: -150px;
+}
+
+a{
+    font-family: Didact Gothic;
+    margin-left: 30px;
+    padding-bottom: 5px;
+}
+
+h3, p{
+    margin-left: 40px;
+    font-family: Oswald;
+}
+
+.window{
+    background-color: #fff;
+    margin: auto;
+    width: 500px;
+    height: 300px;
+    box-shadow: 0 2px 3px #000;
+}
+
+.window-back{
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+}
+
+.left, .right{
+    display: inline;
+    margin-left: 30px;
+    padding-top: 20px
+}
