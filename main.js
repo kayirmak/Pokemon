@@ -48,16 +48,25 @@ $(document).ready(() => {
 
 
 
-const pokemons = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20';
+let pokemons = `https://pokeapi.co/api/v2/pokemon/?offset=${0}&limit=20`;
+let j = 0;
 $('.right').on('click', () => {
-    console.log('hello')
-    const pokemons = 'https://pokeapi.co/api/v2/pokemon/?offset=21&limit=20';
+    $('.list').text('')
+    pokemons = `https://pokeapi.co/api/v2/pokemon/?offset=${j+=20}&limit=20`;
     listPokemon()
 })
 
-const listPokemon = async () => {
-   
 
+$('.left').on('click', () => {
+    if(j <= 0) return
+    $('.list').text('')
+    pokemons = `https://pokeapi.co/api/v2/pokemon/?offset=${j-=20}&limit=20`;
+    listPokemon()
+})
+
+
+
+const listPokemon = async () => {
     const result = await fetch(pokemons);
     const data = await result.json();
   
@@ -65,13 +74,14 @@ const listPokemon = async () => {
     $('.window-back').hide()
    
     data.results.forEach(async (item, id) => {
-        let pok = `https://pokeapi.co/api/v2/pokemon/${id+1}`;
+        let pok = `https://pokeapi.co/api/v2/pokemon/${id + j + 1}`;
         const res = await fetch(pok);
         const datab = await res.json();
+        
 
         $('.list').append(`
-            <a class = 'item-${id = id + 1}'>${item.name}</a>
-            <br>
+            <div class = 'pokem item-${id}'>${item.name}</div>
+            
         `)
 
         $(`.item-${id}`).on('click', () => {
@@ -80,11 +90,13 @@ const listPokemon = async () => {
             $('.modal').append(`
                 <h3>Имя - ${datab.name}</h3>
                 <p>Тип - ${datab.types[0].type.name}</p>
-                <p>Вес - ${datab.weight}</p>
-                <p>Рост - ${datab.height}</p>
+                <p>Вес - ${datab.weight} кг</p>
+                <p>Рост - ${datab.height} </p>
                 <img src = ${datab.sprites.front_default} width = "200px">
             `)
+            j++;
         })
+        
         
             
         }) 
@@ -95,6 +107,7 @@ const listPokemon = async () => {
             
         })
 
+        
         
 
 }
